@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scan Result</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-image: url('./static/background.jpg'), url('./static/frame.jpg'); /* Use both images */
+      background-size: cover, contain; /* Cover for the first image, contain for the second */
+      background-position: center, center; /* Center both images */
+      background-repeat: no-repeat, no-repeat; /* No repeat for both images */
+      color: #ffffff;
+    }
+    .container {
+      max-width: 600px;
+      margin-top: 100px;
+      background-color: rgba(0, 0, 0, 0.7); /* Dark transparent box */
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">Scan Result</h1>
+    {% if message %}
+      <div class="alert alert-info" role="alert">
+        {{ message }}
+      </div>
+    {% endif %}
+    {% if result %}
+      <ul class="list-group">
+        {% for engine, reason in result.items() %}
+          <li class="list-group-item list-group-item-danger">
+            {{ engine }}: {{ reason }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="alert alert-success" role="alert">
+        No viruses detected.
+      </div>
+    {% endif %}
+    <a href="/" class="btn btn-primary">Upload another file</a>
+  </div>
+</body>
+</html>
